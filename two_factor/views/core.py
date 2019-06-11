@@ -103,7 +103,8 @@ class LoginView(IdempotentSessionWizardView):
         """
         Login the user and redirect to the desired page.
         """
-        login(self.request, self.get_user())
+        login(self.request, self.get_user(),
+              backend=settings.TWO_FACTOR_DEFAULT_AUTHENTICATION_BACKEND)
 
         redirect_to = self.request.POST.get(
             self.redirect_field_name,
